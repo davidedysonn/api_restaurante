@@ -1,0 +1,1 @@
+insert into Cardapio(nomeItemCardapio, descricao, preco) values ('PorçãoFrango', 'Frango Milanesa', 4.10)
