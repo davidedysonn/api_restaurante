@@ -13,20 +13,25 @@ public class Comanda implements Serializable {
     private Long id;
     private String observacoes;
     @OneToMany
-    @JoinColumn(name = "cardapio_id", nullable = false)
+    @JoinColumn(name = "comanda_id", nullable = false)
+    //@JoinColumn(name = "comanda_id", nullable = false)
     private List<Cardapio> listCardapio = new ArrayList<>();
 
     private Double totalComprado;
-    //private List<Mesa> listMesa =new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "mesa_id")
+    //@JoinColumn(name = "mesa_id")
+    private Mesa mesa;
 
     public Comanda() {
     }
 
-    public Comanda(Long id, String observacoes, List<Cardapio> listCardapio, Double totalComprado) {
+    public Comanda(Long id, String observacoes, List<Cardapio> listCardapio, Double totalComprado, Mesa mesa) {
         this.id = id;
         this.observacoes = observacoes;
         this.listCardapio = listCardapio;
         this.totalComprado = totalComprado;
+        this.mesa = mesa;
     }
 
     public Long getId() {
@@ -59,6 +64,14 @@ public class Comanda implements Serializable {
 
     public void setTotalComprado(Double totalComprado) {
         this.totalComprado = totalComprado;
+    }
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
     }
 
     @Override

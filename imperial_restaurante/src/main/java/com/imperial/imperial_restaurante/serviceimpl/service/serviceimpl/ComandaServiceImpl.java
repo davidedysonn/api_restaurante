@@ -67,7 +67,9 @@ public class ComandaServiceImpl implements ComandaService {
         if(!respostaComanda.isEmpty()){
             respostaComanda.get().setId(comandaDTO.getId());
             respostaComanda.get().setObservacoes(comandaDTO.getObservacoes());
+
            // respostaComanda.get().setListCardapio(altComanda.getListCardapio());
+           // respostaComanda.get().setMesa(comandaDTO.getMesaDTO().);
             ComandaDTO respostaComandaDTO = comandaMapping.convertComandaToDTO(respostaComanda.get());
 
             return respostaComandaDTO;

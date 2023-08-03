@@ -1,5 +1,7 @@
 package com.imperial.imperial_restaurante.dtos;
 
+import com.imperial.imperial_restaurante.entidades.Mesa;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,17 +10,18 @@ public class ComandaDTO {
     private String observacoes;
     private List<CardapioDTO> listCardapioDTO = new ArrayList<>();
     private Double totalComprado;
-    //private List<Mesa> listMesa =new ArrayList<>();
+    private MesaDTO mesaDTO;
 
 
     public ComandaDTO() {
     }
 
-    public ComandaDTO(Long id, String observacoes, List<CardapioDTO> listCardapioDTO, Double totalComprado) {
+    public ComandaDTO(Long id, String observacoes, List<CardapioDTO> listCardapioDTO, Double totalComprado, MesaDTO mesaDTO) {
         this.id = id;
         this.observacoes = observacoes;
         this.listCardapioDTO = listCardapioDTO;
         this.totalComprado = totalComprado;
+        this.mesaDTO = mesaDTO;
     }
 
     public Long getId() {
@@ -51,6 +54,14 @@ public class ComandaDTO {
 
     public void setTotalComprado(Double totalComprado) {
         this.totalComprado = totalComprado;
+    }
+
+    public MesaDTO getMesaDTO() {
+        return mesaDTO;
+    }
+
+    public void setMesaDTO(MesaDTO mesaDTO) {
+        this.mesaDTO = mesaDTO;
     }
 }
 

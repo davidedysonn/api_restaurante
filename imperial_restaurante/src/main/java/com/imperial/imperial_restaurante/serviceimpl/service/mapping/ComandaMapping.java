@@ -21,6 +21,7 @@ public class ComandaMapping {
         respostaComandaDTO.setObservacoes(comanda.getObservacoes());
       //  respostaComandaDTO.setListCardapioDTO(altComandaDTO.getListCardapioDTO());
         respostaComandaDTO.setTotalComprado(comanda.getTotalComprado());
+//        respostaComandaDTO.setMesaDTO(comanda.getMesa());
 
         return respostaComandaDTO;
     }
@@ -31,6 +32,7 @@ public class ComandaMapping {
         respostaComanda.setObservacoes(comandaDTO.getObservacoes());
     //    respostaComanda.setListCardapio(altComanda.getListCardapio());
         respostaComanda.setTotalComprado(comandaDTO.getTotalComprado());
+//        respostaComanda.setMesa(comandaDTO.getMesaDTO());
 
         return respostaComanda;
     }
