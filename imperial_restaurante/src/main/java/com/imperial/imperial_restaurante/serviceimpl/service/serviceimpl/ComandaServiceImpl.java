@@ -12,14 +12,22 @@ import java.util.Optional;
 @Service
 public class ComandaServiceImpl implements ComandaService {
 
-    private Comanda altComanda;
-    private ComandaDTO altComandaDTO;
+//    private Comanda altComanda;
+//    private ComandaDTO altComandaDTO;
+//    private ComandaMapping comandaMapping;
+//    private ComandaRepository comandaRepository;
+//
+//    public ComandaServiceImpl(Comanda altComanda, ComandaDTO altComandaDTO, ComandaMapping comandaMapping, ComandaRepository comandaRepository) {
+//        this.altComanda = altComanda;
+//        this.altComandaDTO = altComandaDTO;
+//        this.comandaMapping = comandaMapping;
+//        this.comandaRepository = comandaRepository;
+//    }
+
     private ComandaMapping comandaMapping;
     private ComandaRepository comandaRepository;
 
-    public ComandaServiceImpl(Comanda altComanda, ComandaDTO altComandaDTO, ComandaMapping comandaMapping, ComandaRepository comandaRepository) {
-        this.altComanda = altComanda;
-        this.altComandaDTO = altComandaDTO;
+    public ComandaServiceImpl(ComandaMapping comandaMapping, ComandaRepository comandaRepository) {
         this.comandaMapping = comandaMapping;
         this.comandaRepository = comandaRepository;
     }
@@ -59,7 +67,7 @@ public class ComandaServiceImpl implements ComandaService {
         if(!respostaComanda.isEmpty()){
             respostaComanda.get().setId(comandaDTO.getId());
             respostaComanda.get().setObservacoes(comandaDTO.getObservacoes());
-            respostaComanda.get().setListCardapio(altComanda.getListCardapio());
+           // respostaComanda.get().setListCardapio(altComanda.getListCardapio());
             ComandaDTO respostaComandaDTO = comandaMapping.convertComandaToDTO(respostaComanda.get());
 
             return respostaComandaDTO;
