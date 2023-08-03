@@ -1,5 +1,7 @@
 package com.imperial.imperial_restaurante.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class Mesa implements Serializable {
     private Integer numeroPessoa;
 
     @OneToMany(mappedBy = "mesa")
+    @JsonIgnoreProperties(value = "mesa")
     private List<Comanda> listComandas = new ArrayList<>();
 
     public Mesa() {
