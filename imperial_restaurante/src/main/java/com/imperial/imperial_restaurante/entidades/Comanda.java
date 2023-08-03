@@ -1,5 +1,7 @@
 package com.imperial.imperial_restaurante.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,12 +16,14 @@ public class Comanda implements Serializable {
     private String observacoes;
     @OneToMany
     @JoinColumn(name = "comanda_id", nullable = false)
+
     //@JoinColumn(name = "comanda_id", nullable = false)
     private List<Cardapio> listCardapio = new ArrayList<>();
 
     private Double totalComprado;
     @ManyToOne
     @JoinColumn(name = "mesa_id")
+
     //@JoinColumn(name = "mesa_id")
     private Mesa mesa;
 

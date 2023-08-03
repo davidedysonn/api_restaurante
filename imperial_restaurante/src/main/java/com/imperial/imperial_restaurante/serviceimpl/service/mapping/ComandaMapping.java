@@ -4,10 +4,19 @@ import com.imperial.imperial_restaurante.dtos.ComandaDTO;
 import com.imperial.imperial_restaurante.entidades.Comanda;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ComandaMapping {
 
-//    private ComandaDTO altComandaDTO;
+
+    private MesaMapping mesaMapping;
+
+    public ComandaMapping(MesaMapping mesaMapping) {
+        this.mesaMapping = mesaMapping;
+    }
+    //    private ComandaDTO altComandaDTO;
 //    private Comanda altComanda;
 //
 //    public ComandaMapping(ComandaDTO altComandaDTO, Comanda altComanda) {
@@ -20,6 +29,7 @@ public class ComandaMapping {
         respostaComandaDTO.setId(comanda.getId());
         respostaComandaDTO.setObservacoes(comanda.getObservacoes());
       //  respostaComandaDTO.setListCardapioDTO(altComandaDTO.getListCardapioDTO());
+
         respostaComandaDTO.setTotalComprado(comanda.getTotalComprado());
 //        respostaComandaDTO.setMesaDTO(comanda.getMesa());
 
@@ -36,4 +46,22 @@ public class ComandaMapping {
 
         return respostaComanda;
     }
+
+    public List<ComandaDTO> convertListComandaToDTO (List<Comanda> comandaList){
+        List<ComandaDTO> respostaListComandaDTO = new ArrayList<>();
+        comandaList.stream().forEach(listComandaEntity ->{
+            respostaListComandaDTO.add(convertComandaToDTO(listComandaEntity));
+        });
+        return respostaListComandaDTO;
+    }
+
+    public List<Comanda> convertListComandaToEntity (List<ComandaDTO> comandaDTOList){
+        List<Comanda> respostaListComandaEntity = new ArrayList<>();
+        comandaDTOList.stream().forEach(listComandaDTO ->{
+            respostaListComandaEntity.add(convertComandaToEntity(listComandaDTO));
+        });
+        return respostaListComandaEntity;
+    }
+
+
 }

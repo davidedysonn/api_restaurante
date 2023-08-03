@@ -8,6 +8,10 @@ import com.imperial.imperial_restaurante.repository.MesaRepository;
 import com.imperial.imperial_restaurante.serviceimpl.service.ComandaService;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MesaMapping {
 
@@ -26,8 +30,8 @@ public class MesaMapping {
         MesaDTO respostaMesaDTO = new MesaDTO();
         respostaMesaDTO.setId(mesa.getId());
         respostaMesaDTO.setNumeroPessoa(mesa.getNumeroPessoa());
-       // respostaMesaDTO.setListComandasDTO(mesa.getListComandas());
-
+        //respostaMesaDTO.setListComandasDTO(mesa.getListComandas());
+        respostaMesaDTO.setListComandasDTO(comandaMapping.convertListComandaToDTO(mesa.getListComandas()));
         return respostaMesaDTO;
     }
 
@@ -35,8 +39,27 @@ public class MesaMapping {
         Mesa respostaMesaEntity = new Mesa();
         respostaMesaEntity.setId(mesaDTO.getId());
         respostaMesaEntity.setNumeroPessoa(mesaDTO.getNumeroPessoa());
+        respostaMesaEntity.setListComandas(comandaMapping.convertListComandaToEntity(mesaDTO.getListComandasDTO()));
        // respostaMesaEntity.setListComandas(mesaDTO.getListComandasDTO());
 
         return respostaMesaEntity;
     }
+
+    public List<MesaDTO> convertListMesaToDTO (List<Mesa> listMesa){
+        List<MesaDTO> respostaMesaDTOList = new ArrayList<>();
+        listMesa.stream().forEach(mesa ->{
+            respostaMesaDTOList.add(convertMesaToDTO(mesa));
+        });
+        return respostaMesaDTOList;
+
+    }
+
+    public List<Mesa> convertListMesaToEntity (List<MesaDTO> mesaDTOList){
+        List<Mesa> respostaListMesa = new ArrayList<>();
+        mesaDTOList.stream().forEach(mesaDTO -> {
+            respostaListMesa.add(convertToEntity(mesaDTO));
+        });
+        return respostaListMesa;
+    }
+
 }
