@@ -1,14 +1,10 @@
 package com.imperial.imperial_restaurante.serviceimpl.service.mapping;
 
-import com.imperial.imperial_restaurante.dtos.ComandaDTO;
 import com.imperial.imperial_restaurante.dtos.MesaDTO;
-import com.imperial.imperial_restaurante.entidades.Comanda;
 import com.imperial.imperial_restaurante.entidades.Mesa;
-import com.imperial.imperial_restaurante.repository.MesaRepository;
 import com.imperial.imperial_restaurante.serviceimpl.service.ComandaService;
 import org.springframework.stereotype.Service;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +28,11 @@ public class MesaMapping {
         respostaMesaDTO.setNumeroPessoa(mesa.getNumeroPessoa());
         //respostaMesaDTO.setListComandasDTO(mesa.getListComandas());
         respostaMesaDTO.setListComandasDTO(comandaMapping.convertListComandaToDTO(mesa.getListComandas()));
+
         return respostaMesaDTO;
     }
 
-    public Mesa convertToEntity (MesaDTO mesaDTO){
+    public Mesa convertMesaToEntity(MesaDTO mesaDTO){
         Mesa respostaMesaEntity = new Mesa();
         respostaMesaEntity.setId(mesaDTO.getId());
         respostaMesaEntity.setNumeroPessoa(mesaDTO.getNumeroPessoa());
@@ -57,7 +54,7 @@ public class MesaMapping {
     public List<Mesa> convertListMesaToEntity (List<MesaDTO> mesaDTOList){
         List<Mesa> respostaListMesa = new ArrayList<>();
         mesaDTOList.stream().forEach(mesaDTO -> {
-            respostaListMesa.add(convertToEntity(mesaDTO));
+            respostaListMesa.add(convertMesaToEntity(mesaDTO));
         });
         return respostaListMesa;
     }

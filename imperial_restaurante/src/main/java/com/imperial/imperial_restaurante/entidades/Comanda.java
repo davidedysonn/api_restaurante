@@ -17,13 +17,11 @@ public class Comanda implements Serializable {
     private String observacoes;
     @OneToMany
     @JoinColumn(name = "comanda_id", nullable = false)
-    //@JoinColumn(name = "comanda_id", nullable = false)
     private List<Cardapio> listCardapio = new ArrayList<>();
 
     private Double totalComprado;
     @ManyToOne
     @JoinColumn(name = "mesa_id")
-    //@JoinColumn(name = "mesa_id")
     private Mesa mesa;
 
     public Comanda() {

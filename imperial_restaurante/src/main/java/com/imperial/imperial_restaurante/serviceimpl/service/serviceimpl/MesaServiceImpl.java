@@ -23,7 +23,7 @@ public class MesaServiceImpl implements MesaService {
 
     @Override
     public MesaDTO adcMesa(MesaDTO mesaDTO) {
-        Mesa respostaMesa = mesaMapping.convertToEntity(mesaDTO);
+        Mesa respostaMesa = mesaMapping.convertMesaToEntity(mesaDTO);
         Mesa respostaMesaSalva = mesaRepository.save(respostaMesa);
         MesaDTO respostaMesaDTO = mesaMapping.convertMesaToDTO(respostaMesaSalva);
 

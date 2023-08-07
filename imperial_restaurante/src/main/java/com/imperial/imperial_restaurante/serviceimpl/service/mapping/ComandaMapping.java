@@ -2,8 +2,10 @@ package com.imperial.imperial_restaurante.serviceimpl.service.mapping;
 
 import com.imperial.imperial_restaurante.dtos.CardapioDTO;
 import com.imperial.imperial_restaurante.dtos.ComandaDTO;
+import com.imperial.imperial_restaurante.dtos.MesaDTO;
 import com.imperial.imperial_restaurante.entidades.Cardapio;
 import com.imperial.imperial_restaurante.entidades.Comanda;
+import com.imperial.imperial_restaurante.entidades.Mesa;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,21 +15,12 @@ import java.util.List;
 public class ComandaMapping {
 
 
-    private MesaMapping mesaMapping;
+
     private CardapioMapping cardapioMapping;
 
-    public ComandaMapping(MesaMapping mesaMapping, CardapioMapping cardapioMapping) {
-        this.mesaMapping = mesaMapping;
+    public ComandaMapping(CardapioMapping cardapioMapping) {
         this.cardapioMapping = cardapioMapping;
     }
-
-    //    private ComandaDTO altComandaDTO;
-//    private Comanda altComanda;
-//
-//    public ComandaMapping(ComandaDTO altComandaDTO, Comanda altComanda) {
-//        this.altComandaDTO = altComandaDTO;
-//        this.altComanda = altComanda;
-//    }
 
     public ComandaDTO convertComandaToDTO(Comanda comanda){
         ComandaDTO respostaComandaDTO = new ComandaDTO();
@@ -36,7 +29,8 @@ public class ComandaMapping {
         respostaComandaDTO.setListCardapioDTO(convertListCardapioToDTO(comanda.getListCardapio()));
 
         respostaComandaDTO.setTotalComprado(comanda.getTotalComprado());
-//        respostaComandaDTO.setMesaDTO(comanda.getMesa());
+        // pornto de possivel looping 1
+        respostaComandaDTO.setMesaDTO(convertMesaToDTOComanda(comanda.getMesa()));
 
         return respostaComandaDTO;
     }
@@ -45,13 +39,35 @@ public class ComandaMapping {
         Comanda respostaComanda = new Comanda();
         respostaComanda.setId(comandaDTO.getId());
         respostaComanda.setObservacoes(comandaDTO.getObservacoes());
-    //    respostaComanda.setListCardapio(altComanda.getListCardapio());
+
         respostaComanda.setTotalComprado(comandaDTO.getTotalComprado());
         respostaComanda.setListCardapio(convertListCardapioToEntity(comandaDTO.getListCardapioDTO()));
-//        respostaComanda.setMesa(comandaDTO.getMesaDTO());
+        // pornto de possivel looping 2
+        respostaComanda.setMesa(convertMesaToEntityComanda(comandaDTO.getMesaDTO()));
+        //test
 
+
+
+        //
         return respostaComanda;
     }
+    public Mesa convertMesaToEntityComanda(MesaDTO mesaDTO){
+        Mesa respostaMesa = new Mesa();
+        respostaMesa.setId(mesaDTO.getId());
+        respostaMesa.setListComandas(convertListComandaToEntity(mesaDTO.getListComandasDTO()));
+        respostaMesa.setNumeroPessoa(mesaDTO.getNumeroPessoa());
+        return respostaMesa;
+    }
+    public MesaDTO convertMesaToDTOComanda(Mesa mesa){
+        MesaDTO respostaMesaDTO = new MesaDTO();
+        respostaMesaDTO.setId(mesa.getId());
+        respostaMesaDTO.setListComandasDTO(convertListComandaToDTO(mesa.getListComandas()));
+        respostaMesaDTO.setNumeroPessoa(mesa.getNumeroPessoa());
+        return respostaMesaDTO;
+    }
+
+
+
 
     public List<ComandaDTO> convertListComandaToDTO (List<Comanda> comandaList){
         List<ComandaDTO> respostaListComandaDTO = new ArrayList<>();

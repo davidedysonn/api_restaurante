@@ -24,19 +24,19 @@ public class MesaController {
         return ResponseEntity.created(new URI("/mesa/adc-mesa")).body(respostaMesaDTO);
     }
 
-    @PutMapping("/atualizar-mesa")
+    @PutMapping("/atualizar-mesa/{id}")
     public ResponseEntity<MesaDTO> atualizarMesa (@PathVariable Long id, @RequestBody MesaDTO mesaDTO){
         MesaDTO respostaMesaDTO = mesaService.atualizarMesa(id, mesaDTO);
         return ResponseEntity.ok().body(respostaMesaDTO);
     }
-    @DeleteMapping("/deletar-mesa")
+    @DeleteMapping("/deletar-mesa/{id}")
     public ResponseEntity<Void> deletarMesa (@PathVariable Long id){
         mesaService.deletarMesaById(id);
 
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/mesa-id")
+    @GetMapping("/mesa-id/{id}")
     public ResponseEntity<MesaDTO> mesaId (@PathVariable Long id){
         MesaDTO respostaMesaDTO = mesaService.findMesaById(id);
         return ResponseEntity.ok().body(respostaMesaDTO);
